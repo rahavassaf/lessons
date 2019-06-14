@@ -61,7 +61,7 @@ class Stack
             curr = curr.next_node
         end
         
-        return vals.join("\n")
+        return vals.join(" -> ")
     end
 end
 
