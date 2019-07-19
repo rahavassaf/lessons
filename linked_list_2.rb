@@ -1,3 +1,5 @@
+require 'set'
+
 class LinkedList
 
     class ListNode
@@ -23,6 +25,7 @@ class LinkedList
         end
     end
     
+    attr_accessor :head # only to test infinite?, not really a good idea
     
     def initialize
         @head = nil
@@ -38,6 +41,24 @@ class LinkedList
         if ! @head.nil?
             @head = @head.reverse(nil)
         end
+    end
+    
+    
+    def infinite?
+        s = Set.new()
+        
+        curr = @head
+        
+        while ! curr.nil?
+            if s.include?(curr)
+                return true
+            end
+            
+            s << curr
+            curr = curr.next_node
+        end
+        
+        return false
     end
     
     
@@ -57,31 +78,27 @@ end
 
 
 
-#l = LinkedList.new()
-#l.push(5)
-#l.push(8)
-#l.push(15)
-#l.push(4)
-#l.push(745)
-#l.push(152)
-#l.push(85)
-#l.push(72)
-#l.push(36)
-#puts l.to_s
-#l.reverse()
-#puts l.to_s
-#l.reverse()
-#puts l.to_s
-#l.reverse()
-#puts l.to_s
-#l.reverse()
-#puts l.to_s
-#l.reverse()
-#puts l.to_s
-#l.reverse()
-#puts l.to_s
-#l.reverse()
-#puts l.to_s
+l = LinkedList.new()
+l.push(5)
+l.push(8)
+l.push(15)
+l.push(4)
+l.push(745)
+l.push(152)
+l.push(85)
+l.push(72)
+l.push(36)
+puts l.to_s
+l.reverse()
+puts l.to_s
 
 
+puts l.infinite? # false
+
+
+# loop the tail back to the head
+l.head.next_node.next_node.next_node.next_node.next_node.next_node.next_node.next_node = l.head
+
+
+puts l.infinite? # true
 
